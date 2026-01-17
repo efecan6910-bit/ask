@@ -18,7 +18,7 @@ body {
   position: fixed;
   top: -50px;
   font-size: 40px;
-  animation: fall 10s linear forwards;
+  animation: fall linear forwards;
   cursor: pointer;
 }
 
@@ -32,6 +32,7 @@ body {
   border-radius: 15px;
   font-size: 14px;
   white-space: nowrap;
+  pointer-events: none; /* Yazı tıklamayı engellemez */
 }
 
 @keyframes fall {
@@ -46,19 +47,19 @@ body {
 
 <script>
 const sozler = [
-  "Seni çok seviyorum AŞKIKIMMMM ❤️",
-  "İyi ki varsın KURBAN OLDUĞUM 😘",
-  "Kalbim senin AŞKIM 💖",
-  "Hep benim ol BALIM 💕",
-  "Gülüşün dünyam BEBEĞİM 🌍",
+  "Seni çok seviyorum AŞKIM❤️",
+  "İyi ki varsın DUDUMMM😘",
+  "Kalbim senin AŞKIKIMM💖",
+  "Hep benim ol DURUŞUMM💕",
+  "Gülüşün dünyam 🌍",
   "Seninle her şey daha güzel 🌸",
   "Sen benim ışığımsın ✨",
   "Aşkımız sonsuz 💞",
-  "Kalbim hep seninle DURUŞUMMMM💓",
+  "Kalbim hep seninle BUSUSUM 💓",
   "Sen benim mutluluğumsun 🥰",
   "Sensiz bir gün düşünemem 💘",
-  "Gözlerin büyülüyor 🌟",
-  "Seninle her an özelAŞKIKIKMMM 💖",
+  "Gözlerin büyülüyor AŞKIM🌟",
+  "Seninle her an özel 💖",
   "Sen benim hayatımın anlamısın ❤️",
   "Sana her zaman aşık olacağım 💕"
 ];
@@ -68,36 +69,33 @@ function kalpYagdir() {
   kalp.className = "heart";
   kalp.style.left = Math.random() * 85 + "vw";
 
-  // Başta BURAYA TIKLA yazısı
-  const tıklaYazi = document.createElement("div");
-  tıklaYazi.className = "text";
-  tıklaYazi.innerText = "BURAYA TIKLA";
-  kalp.appendChild(tıklaYazi);
+  // Kalbin üstünde yazı: "BURAYA TIKLA"
+  const yazı = document.createElement("div");
+  yazı.className = "text";
+  yazı.innerText = "BURAYA TIKLA";
+  kalp.appendChild(yazı);
 
+  // Tıklayınca yazı değişecek
   kalp.onclick = function () {
-    const mevcutYazi = kalp.querySelector(".text");
-    if (mevcutYazi) mevcutYazi.remove();
+    if (yazı) yazı.remove(); // BURAYA TIKLA kaybolur
 
-    const yazi = document.createElement("div");
-    yazi.className = "text";
-
-    // Mesajı rastgele ve daha farklı seçmek için şunları yapıyoruz:
-    const rastgeleIndex = Math.floor(Math.random() * sozler.length);
-    const mesaj = sozler[rastgeleIndex];
-    yazi.innerText = `(${mesaj})`;
-
-    kalp.appendChild(yazi);
+    const mesajYazi = document.createElement("div");
+    mesajYazi.className = "text";
+    const mesaj = sozler[Math.floor(Math.random() * sozler.length)];
+    mesajYazi.innerText = `(${mesaj})`;
+    kalp.appendChild(mesajYazi);
   };
 
   document.body.appendChild(kalp);
 
+  // Kalbi düşüp kaybolma
   setTimeout(() => {
     kalp.remove();
   }, 12000);
 }
 
-// Daha hızlı ve rastgele kalp üretimi
-setInterval(kalpYagdir, 600);
+// Daha hızlı kalp üretimi
+setInterval(kalpYagdir, 500);
 </script>
 
 </body>
