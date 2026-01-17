@@ -19,13 +19,14 @@ body {
   top: -50px;
   font-size: 40px;
   animation: fall 10s linear forwards;
+  cursor: pointer;
 }
 
 /* YAZI */
 .text {
   position: absolute;
   top: -35px;
-  left: -40px;
+  left: -50px;
   background: white;
   padding: 6px 10px;
   border-radius: 15px;
@@ -45,36 +46,44 @@ body {
 
 <script>
 const sozler = [
-  "Seni çok seviyorum DURUŞUM ❤️",
-  "İyi ki varsın AŞKIKIM😘",
-  "Kalbim senin KURBAN OLDUĞUM💖",
-  "Hep benim ol 💕",
-  "Gülüşün dünyam 🌍",
+  "Seni çok seviyorum AŞKIKIMM ❤️",
+  "İyi ki varsın 😘",
+  "Kalbim senin DURUŞUM 💖",
+  "Hep benim ol BALIMM 💕",
+  "GÜLÜŞÜN DÜNYAM AŞKIKIM🌍",
   "Seninle her şey daha güzel 🌸",
   "Sen benim ışığımsın ✨",
-  "Aşkımız sonsuz 💞",
-  "Kalbim hep seninle DURUM💓",
+  "KURBAN OLDUĞUM AŞKIMMM 💞",
+  "Kalbim hep seninle 💓",
   "Sen benim mutluluğumsun 🥰",
   "Sensiz bir gün düşünemem 💘",
-  "Gözlerin büyülüyor DURUŞUMMM 🌟",
-  "Seninle her an özel AŞKIKIMMM💖",
-  "Sen benim hayatımın anlamısın ❤️",
+  "Gözlerin büyülüyor SEVGİLİM🌟",
+  "Seninle her an özel AŞKIMMMM 💖",
+  "Sen benim hayatımın anlamısın BİRTANEM ❤️",
   "Sana her zaman aşık olacağım 💕"
 ];
 
 function kalpYagdir() {
   const kalp = document.createElement("div");
   kalp.className = "heart";
-  kalp.innerHTML = "❤️";
+  kalp.innerHTML = ""; // Başta boş bırakıyoruz
+
+  // BURAYA TIKLA yazısını ekleyelim
+  const tıklaYazi = document.createElement("div");
+  tıklaYazi.className = "text";
+  tıklaYazi.innerText = "BURAYA TIKLA";
+  kalp.appendChild(tıklaYazi);
 
   kalp.style.left = Math.random() * 85 + "vw";
 
   kalp.onclick = function () {
-    if (kalp.querySelector(".text")) return;
+    const mevcutYazi = kalp.querySelector(".text");
+    if (mevcutYazi) mevcutYazi.remove();
 
     const yazi = document.createElement("div");
     yazi.className = "text";
-    yazi.innerText = sozler[Math.floor(Math.random() * sozler.length)];
+    const mesaj = sozler[Math.floor(Math.random() * sozler.length)];
+    yazi.innerText = `(${mesaj})`; // Parantez içine alındı
     kalp.appendChild(yazi);
   };
 
