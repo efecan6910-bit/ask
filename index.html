@@ -4,16 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>❤️</title>
-
 <style>
 body {
   margin: 0;
-  background: pink; /* Basit pembe arka plan */
-  overflow: hidden;
+  background: pink;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-/* KALP */
+/* Başlangıç ekranı */
+#startScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,192,203,0.9); /* Pembe transparan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+#startScreen span {
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+  background: white;
+  padding: 20px 40px;
+  border-radius: 20px;
+}
+
+/* Düşen kalpler */
 .heart {
   position: fixed;
   top: -50px;
@@ -22,7 +45,7 @@ body {
   cursor: pointer;
 }
 
-/* YAZI */
+/* Mesaj yazıları kalbin üstünde */
 .text {
   position: absolute;
   top: -35px;
@@ -32,7 +55,7 @@ body {
   border-radius: 15px;
   font-size: 14px;
   white-space: nowrap;
-  pointer-events: none; /* Yazı tıklamayı engellemez */
+  pointer-events: none;
 }
 
 @keyframes fall {
@@ -42,42 +65,42 @@ body {
 }
 </style>
 </head>
-
 <body>
 
+<!-- Başlangıç ekranı -->
+<div id="startScreen">
+  <span>BURAYA TIKLA</span>
+</div>
+
 <script>
+// Mesaj listesi
 const sozler = [
-  "Seni çok seviyorum AŞKIM❤️",
-  "İyi ki varsın DUDUMMM😘",
-  "Kalbim senin AŞKIKIMM💖",
-  "Hep benim ol DURUŞUMM💕",
+  "Seni çok seviyorum AŞKIMM❤️",
+  "İyi ki varsın KURBAN OLDUĞUM😘",
+  "Kalbim senin BUSUSUMMM 💖",
+  "Hep benim ol BALIMMMM 💕",
   "Gülüşün dünyam 🌍",
   "Seninle her şey daha güzel 🌸",
   "Sen benim ışığımsın ✨",
-  "Aşkımız sonsuz 💞",
-  "Kalbim hep seninle BUSUSUM 💓",
+  "Aşkımız sonsuz KURBAN OLDUĞUM💞",
+  "Kalbim hep seninle 💓",
   "Sen benim mutluluğumsun 🥰",
   "Sensiz bir gün düşünemem 💘",
-  "Gözlerin büyülüyor AŞKIM🌟",
+  "Gözlerin büyülüyor 🌟",
   "Seninle her an özel 💖",
   "Sen benim hayatımın anlamısın ❤️",
   "Sana her zaman aşık olacağım 💕"
 ];
 
+// Kalp yaratma fonksiyonu
 function kalpYagdir() {
   const kalp = document.createElement("div");
   kalp.className = "heart";
   kalp.style.left = Math.random() * 85 + "vw";
 
-  // Kalbin üstünde yazı: "BURAYA TIKLA"
-  const yazı = document.createElement("div");
-  yazı.className = "text";
-  yazı.innerText = "BURAYA TIKLA";
-  kalp.appendChild(yazı);
-
-  // Tıklayınca yazı değişecek
+  // Başta mesaj kutusu kalbin üstünde yok
   kalp.onclick = function () {
-    if (yazı) yazı.remove(); // BURAYA TIKLA kaybolur
+    if (kalp.querySelector(".text")) return;
 
     const mesajYazi = document.createElement("div");
     mesajYazi.className = "text";
@@ -86,16 +109,21 @@ function kalpYagdir() {
     kalp.appendChild(mesajYazi);
   };
 
+  kalp.innerHTML = "❤️";
   document.body.appendChild(kalp);
 
-  // Kalbi düşüp kaybolma
   setTimeout(() => {
     kalp.remove();
   }, 12000);
 }
 
-// Daha hızlı kalp üretimi
-setInterval(kalpYagdir, 500);
+// Başlangıç ekranına tıklayınca kalp animasyonu başlasın
+document.getElementById("startScreen").onclick = function() {
+  this.style.display = "none"; // Kutuyu kaldır
+
+  // Kalp üretimini başlat
+  setInterval(kalpYagdir, 500);
+};
 </script>
 
 </body>
