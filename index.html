@@ -13,19 +13,18 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* Kalp */
+/* KALP */
 .heart {
   position: fixed;
   top: -50px;
-  font-size: 36px;
-  cursor: pointer;
-  animation: fall linear forwards;
+  font-size: 40px;
+  animation: fall 10s linear forwards;
 }
 
-/* Kalbe basınca çıkan yazı */
+/* YAZI */
 .text {
   position: absolute;
-  top: -30px;
+  top: -35px;
   left: -40px;
   background: white;
   padding: 6px 10px;
@@ -36,7 +35,7 @@ body {
 
 @keyframes fall {
   to {
-    transform: translateY(110vh);
+    transform: translateY(120vh);
   }
 }
 </style>
@@ -46,43 +45,38 @@ body {
 
 <script>
 const sozler = [
-  "Seni çok seviyorum DURUŞUMMM❤️",
-  "İyi ki varsın AŞKIMMM 😘",
-  "Kalbim senin KURBAN OLDUĞUM💖",
-  "Hep benim ol AŞKIKIMM💕",
+  "Seni çok seviyorum DURUŞUMMM ❤️",
+  "İyi ki varsın AŞKIMM 😘",
+  "Kalbim senin KURBAN OLDUĞUMMM💖",
+  "Hep benim ol AŞKIKIMM 💕",
   "Gülüşün dünyam 🌍"
 ];
 
 function kalpYagdir() {
   const kalp = document.createElement("div");
   kalp.className = "heart";
-  kalp.innerText = "❤️";
+  kalp.innerHTML = "❤️";
 
-  kalp.style.left = Math.random() * 90 + "vw";
-  kalp.style.animationDuration = (6 + Math.random() * 4) + "s";
+  kalp.style.left = Math.random() * 85 + "vw";
 
-  // KALBE BASINCA
-  kalp.addEventListener("pointerdown", function(e) {
-    e.stopPropagation();
-
-    // Aynı kalpte ikinci kez yazı çıkmasın
+  // TELEFON GARANTİLİ
+  kalp.onclick = function () {
     if (kalp.querySelector(".text")) return;
 
     const yazi = document.createElement("div");
     yazi.className = "text";
     yazi.innerText = sozler[Math.floor(Math.random() * sozler.length)];
     kalp.appendChild(yazi);
-  });
+  };
 
   document.body.appendChild(kalp);
 
   setTimeout(() => {
     kalp.remove();
-  }, 10000);
+  }, 12000);
 }
 
-// Sürekli kalp yağsın
-setInterval(kalpYagdir, 400);
+setInterval(kalpYagdir, 500);
 </script>
 
 </body>
