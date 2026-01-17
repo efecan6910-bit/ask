@@ -19,7 +19,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,192,203,0.9); /* Pembe transparan */
+  background: rgba(255,192,203,0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,24 +28,25 @@ body {
 }
 
 #startScreen span {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   color: red;
   background: white;
   padding: 20px 40px;
   border-radius: 20px;
+  text-align: center;
 }
 
 /* Düşen kalpler */
 .heart {
   position: fixed;
   top: -50px;
-  font-size: 40px;
+  font-size: 50px;
   animation: fall linear forwards;
   cursor: pointer;
 }
 
-/* Mesaj yazıları kalbin üstünde */
+/* Mesajlar kalbin üstünde */
 .text {
   position: absolute;
   top: -35px;
@@ -73,7 +74,7 @@ body {
 </div>
 
 <script>
-// Mesaj listesi
+// Senin mesajların
 const sozler = [
   "Seni çok seviyorum AŞKIMM❤️",
   "İyi ki varsın KURBAN OLDUĞUM😘",
@@ -92,16 +93,16 @@ const sozler = [
   "Sana her zaman aşık olacağım 💕"
 ];
 
-// Kalp yaratma fonksiyonu
+// Kalp üretme fonksiyonu
 function kalpYagdir() {
   const kalp = document.createElement("div");
   kalp.className = "heart";
   kalp.style.left = Math.random() * 85 + "vw";
+  kalp.innerHTML = "❤️";
 
-  // Başta mesaj kutusu kalbin üstünde yok
+  // Kalbe tıklayınca mesaj
   kalp.onclick = function () {
     if (kalp.querySelector(".text")) return;
-
     const mesajYazi = document.createElement("div");
     mesajYazi.className = "text";
     const mesaj = sozler[Math.floor(Math.random() * sozler.length)];
@@ -109,7 +110,6 @@ function kalpYagdir() {
     kalp.appendChild(mesajYazi);
   };
 
-  kalp.innerHTML = "❤️";
   document.body.appendChild(kalp);
 
   setTimeout(() => {
@@ -117,15 +117,12 @@ function kalpYagdir() {
   }, 12000);
 }
 
-// Başlangıç ekranına tıklayınca kalp animasyonu başlasın
+// Başlangıç ekranına tıklayınca kalpler başlasın
 document.getElementById("startScreen").onclick = function() {
-  this.style.display = "none"; // Kutuyu kaldır
-
-  // Kalp üretimini başlat
-  setInterval(kalpYagdir, 500);
+  this.style.display = "none"; // Başlangıç kutusunu kaldır
+  setInterval(kalpYagdir, 500); // Kalp üretimi başlasın
 };
 </script>
 
 </body>
 </html>
-
