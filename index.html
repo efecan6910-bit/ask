@@ -2,109 +2,87 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Aşk Bombası 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️</title>
 
 <style>
 body {
-    margin: 0;
-    height: 100vh;
-    background: pink;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  background: pink;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-button {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 26px;
-    padding: 20px 40px;
-    border: none;
-    border-radius: 40px;
-    background: hotpink;
-    color: white;
-    cursor: pointer;
-    z-index: 10;
-}
-
+/* Kalp */
 .heart {
-    position: absolute;
-    font-size: 60px;
-    cursor: pointer;
-    animation: fall linear;
+  position: fixed;
+  top: -50px;
+  font-size: 36px;
+  cursor: pointer;
+  animation: fall linear forwards;
+}
+
+/* Kalbe basınca çıkan yazı */
+.text {
+  position: absolute;
+  top: -30px;
+  left: -40px;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 @keyframes fall {
-    from { transform: translateY(-80px); }
-    to { transform: translateY(100vh); }
-}
-
-.loveText {
-    position: absolute;
-    font-size: 24px;
-    background: hotpink;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 30px;
-    animation: fade 2.5s forwards;
-    z-index: 20;
-    pointer-events: none;
-}
-
-@keyframes fade {
-    from { opacity: 1; }
-    to { opacity: 0; transform: translateY(-40px); }
+  to {
+    transform: translateY(110vh);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<button onclick="startLove()">Buna basarsan bir şey olur 😍</button>
-
-<audio id="music" src="sarki.mp3"></audio>
-
 <script>
-const words = [
-    "Seni çok seviyorum DURUŞUMM 💖",
-    "İyi ki varsın AŞKIMMM 😍",
-    "Kalbim senin BALIMMM💕",
-    "Dünyam sensin 🌍",
-    "Gülüşüne aşığım KURBAN OLDUĞUM 😊",
-    "Sonsuza kadar biz 💞"
+const sozler = [
+  "Seni çok seviyorum DURUŞUMMM❤️",
+  "İyi ki varsın AŞKIMMM 😘",
+  "Kalbim senin KURBAN OLDUĞUM💖",
+  "Hep benim ol AŞKIKIMM💕",
+  "Gülüşün dünyam 🌍"
 ];
 
-function startLove() {
-    document.querySelector("button").style.display = "none";
+function kalpYagdir() {
+  const kalp = document.createElement("div");
+  kalp.className = "heart";
+  kalp.innerText = "❤️";
 
-    const music = document.getElementById("music");
-    music.volume = 0.7;
-    music.play();
+  kalp.style.left = Math.random() * 90 + "vw";
+  kalp.style.animationDuration = (6 + Math.random() * 4) + "s";
 
-    setInterval(() => {
-        for (let i = 0; i < 4; i++) {
-            const heart = document.createElement("div");
-            heart.className = "heart";
-            heart.innerHTML = "💖";
-            heart.style.left = Math.random() * 90 + "vw";
-            heart.style.animationDuration = (5 + Math.random() * 3) + "s";
+  // KALBE BASINCA
+  kalp.addEventListener("pointerdown", function(e) {
+    e.stopPropagation();
 
-            heart.onclick = (e) => {
-                const txt = document.createElement("div");
-                txt.className = "loveText";
-                txt.innerHTML = words[Math.floor(Math.random() * words.length)];
-                txt.style.left = e.clientX + "px";
-                txt.style.top = e.clientY + "px";
-                document.body.appendChild(txt);
-                setTimeout(() => txt.remove(), 2500);
-            };
+    // Aynı kalpte ikinci kez yazı çıkmasın
+    if (kalp.querySelector(".text")) return;
 
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 8000);
-        }
-    }, 400);
+    const yazi = document.createElement("div");
+    yazi.className = "text";
+    yazi.innerText = sozler[Math.floor(Math.random() * sozler.length)];
+    kalp.appendChild(yazi);
+  });
+
+  document.body.appendChild(kalp);
+
+  setTimeout(() => {
+    kalp.remove();
+  }, 10000);
 }
+
+// Sürekli kalp yağsın
+setInterval(kalpYagdir, 400);
 </script>
 
 </body>
